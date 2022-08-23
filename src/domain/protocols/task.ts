@@ -1,6 +1,6 @@
 export interface Task {
-  id: String;
+  id?: String;
   resume: String;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
