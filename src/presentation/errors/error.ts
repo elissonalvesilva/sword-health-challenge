@@ -27,6 +27,13 @@ export class CantCreateTaskError extends Error {
   }
 }
 
+export class CantUpdateTaskError extends Error {
+  constructor() {
+    super('Task cant be update');
+    this.name = 'CantUpdateTaskError';
+  }
+}
+
 export class InvalidResumeMaxLengthError extends Error {
   constructor(length: number) {
     super(`Invalid resume length length must be less than 2500, actual length: ${length}`);
