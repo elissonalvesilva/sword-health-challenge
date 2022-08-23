@@ -10,7 +10,7 @@ interface SutTypes {
 
 const makeAddTaskRepository = (): AddTaskRepository => {
   class AddTaskRepositoryStub implements AddTaskRepository {
-    addTask(task: Task): Promise<boolean> {
+    addTask(_task: Task): Promise<boolean> {
       return Promise.resolve(true);
     }
   }
@@ -31,7 +31,7 @@ const makeSut = (): SutTypes => {
 describe('DbAddTask UseCase', () => {
   describe('AddTaskRepository', () => {
     it('should call AddTaskRepository with correct values', async () => {
-      const {sut, addTaskRepository} = makeSut();
+      const { sut, addTaskRepository } = makeSut();
 
       const addTaskRepositorySpy = jest.spyOn(
         addTaskRepository,
@@ -42,7 +42,22 @@ describe('DbAddTask UseCase', () => {
 
       expect(addTaskRepositorySpy).toBeCalledWith(
         fakeTask
-      )
+      );
+    });
+
+    it('should call AddTaskRepository throws', async () => {
+      const { sut, addTaskRepository } = makeSut();
+
+      jest
+      .spyOn(addTaskRepository, 'addTask')
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+
+      const fakeTask = fake.fakeTask();
+
+      const promise = sut.add(fakeTask);
+      await expect(promise).rejects.toThrow();
     });
   });
 });
