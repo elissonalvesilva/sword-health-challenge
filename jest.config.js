@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   verbose: true,
   roots: ['<rootDir>/__tests__'],
@@ -10,4 +12,17 @@ module.exports = {
     '.+\\.ts$': 'ts-jest',
   },
   setupFiles: [],
+  moduleDirectories: [
+    'node_modules',
+    path.join(__dirname, 'src'),
+  ],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/build/",
+    "/coverage/",
+    "/test/",
+    "/*.config.js",
+    "/_old/"
+  ],
+
 };
