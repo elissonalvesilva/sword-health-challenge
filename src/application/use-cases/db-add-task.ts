@@ -9,7 +9,7 @@ export class DbAddTask implements AddTask {
 
     const addedTask = await this.addTaskRepository.addTask(task);
 
-    return Promise.resolve(true);
+    return addedTask;
   }
 
 }
