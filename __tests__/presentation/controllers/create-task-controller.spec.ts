@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { MAX_LENGTH_RESUME, Task } from "domain/protocols";
+import { MAX_LENGTH_RESUME } from "domain/entity";
+import { Task } from "domain/protocols";
 import { AddTask } from "domain/use-cases";
 import { CreateTaskController } from "presentation/controllers";
 import { CantCreateTaskError, InvalidResumeMaxLengthError, InvalidResumeMinLengthError, MissingParamError } from "presentation/errors";

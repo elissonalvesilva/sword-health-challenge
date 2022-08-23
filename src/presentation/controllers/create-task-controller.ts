@@ -1,4 +1,4 @@
-import { TaskEntity } from "domain/protocols";
+import { TaskEntity } from "domain/entity";
 import { AddTask } from "domain/use-cases";
 import { CantCreateTaskError, InvalidResumeMaxLengthError, InvalidResumeMinLengthError, MissingParamError } from "presentation/errors";
 import { badRequest, ok, serverError } from "presentation/helpers";
