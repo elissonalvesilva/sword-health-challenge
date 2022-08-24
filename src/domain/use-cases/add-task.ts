@@ -1,5 +1,5 @@
-import { Task } from "domain/protocols/task";
+import { Task } from 'domain/protocols/task';
 
 export interface AddTask {
-  add(task: Task): Promise<boolean>
+  add(task: Task): Promise<boolean>;
 }

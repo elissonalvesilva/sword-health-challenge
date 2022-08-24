@@ -1,13 +1,17 @@
-import { TaskEntity } from "domain/entity";
-import { UpdateTask } from "domain/use-cases";
-import { CantUpdateTaskError, InvalidResumeMaxLengthError, InvalidResumeMinLengthError, MissingParamError } from "presentation/errors";
-import { badRequest, ok, serverError } from "presentation/helpers";
-import { HttpResponse } from "presentation/protocols";
-import { Controller } from "presentation/protocols";
+import { TaskEntity } from 'domain/entity';
+import { UpdateTask } from 'domain/use-cases';
+import {
+  CantUpdateTaskError,
+  InvalidResumeMaxLengthError,
+  InvalidResumeMinLengthError,
+  MissingParamError,
+} from 'presentation/errors';
+import { badRequest, ok, serverError } from 'presentation/helpers';
+import { HttpResponse } from 'presentation/protocols';
+import { Controller } from 'presentation/protocols';
 
 export class UpdateTaskController implements Controller {
-
-  constructor(private readonly updateTask: UpdateTask){}
+  constructor(private readonly updateTask: UpdateTask) {}
 
   async handle(request: any): Promise<HttpResponse> {
     try {
@@ -19,26 +23,27 @@ export class UpdateTaskController implements Controller {
         }
       }
 
-      if(request?.resume.trim() === ''){
+      if (request?.resume.trim() === '') {
         return badRequest(new InvalidResumeMinLengthError());
       }
 
       const entity = new TaskEntity();
       const [task, created] = entity.create(request.resume);
-      if(!created) {
-        return badRequest(new InvalidResumeMaxLengthError(request.resume.length));
+      if (!created) {
+        return badRequest(
+          new InvalidResumeMaxLengthError(request.resume.length),
+        );
       }
 
       const updatedTask = await this.updateTask.update(request.id, task);
 
-      if(!updatedTask) {
+      if (!updatedTask) {
         return badRequest(new CantUpdateTaskError());
       }
 
-      return ok({'message': 'updated'})
+      return ok({ message: 'updated' });
     } catch (error) {
       return serverError(error as Error);
     }
   }
-
 }

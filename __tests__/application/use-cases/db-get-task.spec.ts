@@ -1,27 +1,25 @@
-import { GetTaskRepository } from "application/protocols";
-import { Task } from "domain/protocols";
-import { DbGetTask } from "application/use-cases";
-import { fake } from "utils";
+import { GetTaskRepository } from 'application/protocols';
+import { Task } from 'domain/protocols';
+import { DbGetTask } from 'application/use-cases';
+import { fake } from 'utils';
 
 interface SutTypes {
   sut: DbGetTask;
-  getTaskRepository: GetTaskRepository
+  getTaskRepository: GetTaskRepository;
 }
 
 const fakeTask = fake.fakeTask();
 const makeGetTaskRepository = (): GetTaskRepository => {
   class getTaskRepositoryStub implements GetTaskRepository {
     getAllTasks(): Promise<Task[]> {
-      return Promise.resolve([fakeTask])
+      return Promise.resolve([fakeTask]);
     }
     getTaskById(id: string): Promise<Task> {
-      return Promise.resolve(fakeTask)
+      return Promise.resolve(fakeTask);
     }
-
   }
   return new getTaskRepositoryStub();
-}
-
+};
 
 const makeSut = (): SutTypes => {
   const getTaskRepository = makeGetTaskRepository();
@@ -30,7 +28,7 @@ const makeSut = (): SutTypes => {
   return {
     sut,
     getTaskRepository,
-  }
+  };
 };
 
 describe('DbAddTask UseCase', () => {
@@ -38,10 +36,7 @@ describe('DbAddTask UseCase', () => {
     it('should call getAll with correct values', async () => {
       const { sut, getTaskRepository } = makeSut();
 
-      const getTaskRepositorySpy = jest.spyOn(
-        getTaskRepository,
-        'getAllTasks',
-      );
+      const getTaskRepositorySpy = jest.spyOn(getTaskRepository, 'getAllTasks');
       await sut.getAll();
 
       expect(getTaskRepositorySpy).toBeCalledWith();
@@ -51,10 +46,10 @@ describe('DbAddTask UseCase', () => {
       const { sut, getTaskRepository } = makeSut();
 
       jest
-      .spyOn(getTaskRepository, 'getAllTasks')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
-      );
+        .spyOn(getTaskRepository, 'getAllTasks')
+        .mockReturnValueOnce(
+          new Promise((resolve, reject) => reject(new Error())),
+        );
 
       const promise = sut.getAll();
       await expect(promise).rejects.toThrow();
@@ -64,10 +59,7 @@ describe('DbAddTask UseCase', () => {
     it('should call getAll with correct values', async () => {
       const { sut, getTaskRepository } = makeSut();
 
-      const getTaskRepositorySpy = jest.spyOn(
-        getTaskRepository,
-        'getTaskById',
-      );
+      const getTaskRepositorySpy = jest.spyOn(getTaskRepository, 'getTaskById');
       await sut.get('fake-id');
 
       expect(getTaskRepositorySpy).toBeCalledWith('fake-id');
@@ -77,10 +69,10 @@ describe('DbAddTask UseCase', () => {
       const { sut, getTaskRepository } = makeSut();
 
       jest
-      .spyOn(getTaskRepository, 'getTaskById')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
-      );
+        .spyOn(getTaskRepository, 'getTaskById')
+        .mockReturnValueOnce(
+          new Promise((resolve, reject) => reject(new Error())),
+        );
 
       const promise = sut.get('fake-id');
       await expect(promise).rejects.toThrow();

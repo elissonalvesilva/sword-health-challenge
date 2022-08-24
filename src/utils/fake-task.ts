@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { Task } from "domain/protocols"
+import { Task } from 'domain/protocols';
 
 export const fake = {
   fakeTask(): Task {
@@ -9,6 +9,6 @@ export const fake = {
       resume: faker.lorem.paragraph(),
       createdAt: faker.date.recent(),
       updatedAt: faker.date.recent(),
-    }
-  }
-}
+    };
+  },
+};

@@ -1,24 +1,22 @@
-import { UpdateTaskRepository } from "application/protocols";
-import { Task } from "domain/protocols";
-import { DbUpdateTask } from "application/use-cases";
-import { fake } from "utils";
+import { UpdateTaskRepository } from 'application/protocols';
+import { Task } from 'domain/protocols';
+import { DbUpdateTask } from 'application/use-cases';
+import { fake } from 'utils';
 
 interface SutTypes {
   sut: DbUpdateTask;
-  updateTaskRepository: UpdateTaskRepository
+  updateTaskRepository: UpdateTaskRepository;
 }
 
 const fakeTask = fake.fakeTask();
 const makeUpdateTaskRepository = (): UpdateTaskRepository => {
   class UpdateTaskRepositoryStub implements UpdateTaskRepository {
     updateTask(id: string, task: Task): Promise<boolean> {
-      return Promise.resolve(true)
+      return Promise.resolve(true);
     }
-
   }
   return new UpdateTaskRepositoryStub();
-}
-
+};
 
 const makeSut = (): SutTypes => {
   const updateTaskRepository = makeUpdateTaskRepository();
@@ -27,7 +25,7 @@ const makeSut = (): SutTypes => {
   return {
     sut,
     updateTaskRepository,
-  }
+  };
 };
 
 describe('DbUpdateTask UseCase', () => {
@@ -49,12 +47,12 @@ describe('DbUpdateTask UseCase', () => {
       const { sut, updateTaskRepository } = makeSut();
 
       jest
-      .spyOn(updateTaskRepository, 'updateTask')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
-      );
+        .spyOn(updateTaskRepository, 'updateTask')
+        .mockReturnValueOnce(
+          new Promise((resolve, reject) => reject(new Error())),
+        );
 
-      const promise = sut.update('123-fake-id', fakeTask)
+      const promise = sut.update('123-fake-id', fakeTask);
       await expect(promise).rejects.toThrow();
     });
   });

@@ -1,5 +1,5 @@
-import { Task } from "domain/protocols";
+import { Task } from 'domain/protocols';
 
 export interface NotifyService {
-  notify(task: Task): Promise<boolean>
+  notify(task: Task): Promise<boolean>;
 }

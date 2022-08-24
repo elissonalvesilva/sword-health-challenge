@@ -1,12 +1,11 @@
-import { DeleteTask } from "domain/use-cases/delete-task";
-import { MissingParamError, NotFoundParamError } from "presentation/errors";
-import { badRequest, ok, serverError } from "presentation/helpers";
-import { HttpResponse } from "presentation/protocols";
-import { Controller } from "presentation/protocols";
+import { DeleteTask } from 'domain/use-cases/delete-task';
+import { MissingParamError, NotFoundParamError } from 'presentation/errors';
+import { badRequest, ok, serverError } from 'presentation/helpers';
+import { HttpResponse } from 'presentation/protocols';
+import { Controller } from 'presentation/protocols';
 
 export class DeleteTaskController implements Controller {
-
-  constructor(private readonly deleteTask: DeleteTask){}
+  constructor(private readonly deleteTask: DeleteTask) {}
 
   async handle(request: any): Promise<HttpResponse> {
     try {
@@ -20,14 +19,13 @@ export class DeleteTaskController implements Controller {
 
       const deleted = await this.deleteTask.delete(request.id);
 
-      if(!deleted) {
+      if (!deleted) {
         return badRequest(new NotFoundParamError(request.id));
       }
 
-      return ok({'message': 'deleted'})
+      return ok({ message: 'deleted' });
     } catch (error) {
       return serverError(error as Error);
     }
   }
-
 }

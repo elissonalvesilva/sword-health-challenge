@@ -1,25 +1,28 @@
-import { faker } from "@faker-js/faker";
-import { MAX_LENGTH_RESUME } from "domain/entity";
-import { Task } from "domain/protocols";
-import { AddTask } from "domain/use-cases";
-import { CreateTaskController } from "presentation/controllers";
-import { CantCreateTaskError, InvalidResumeMaxLengthError, InvalidResumeMinLengthError, MissingParamError } from "presentation/errors";
-import { badRequest, ok, serverError } from "presentation/helpers";
-
+import { faker } from '@faker-js/faker';
+import { MAX_LENGTH_RESUME } from 'domain/entity';
+import { Task } from 'domain/protocols';
+import { AddTask } from 'domain/use-cases';
+import { CreateTaskController } from 'presentation/controllers';
+import {
+  CantCreateTaskError,
+  InvalidResumeMaxLengthError,
+  InvalidResumeMinLengthError,
+  MissingParamError,
+} from 'presentation/errors';
+import { badRequest, ok, serverError } from 'presentation/helpers';
 
 const makeAddTask = (): AddTask => {
   class AddTaskStub implements AddTask {
     add(task: Task): Promise<boolean> {
       return Promise.resolve(true);
     }
-
   }
   return new AddTaskStub();
-}
+};
 
 interface ControllerStub {
   sut: CreateTaskController;
-  addTask: AddTask
+  addTask: AddTask;
 }
 
 const makeSut = (): ControllerStub => {
@@ -31,7 +34,7 @@ const makeSut = (): ControllerStub => {
   };
 };
 
-describe('Create Task', ()=> {
+describe('Create Task', () => {
   describe('Create Task Controller', () => {
     it('should return error when request didnt pass resume', async () => {
       const { sut } = makeSut();
@@ -49,19 +52,25 @@ describe('Create Task', ()=> {
       };
 
       const httpResponse = await sut.handle(httpRequest);
-      expect(httpResponse).toEqual(badRequest(new InvalidResumeMinLengthError()));
+      expect(httpResponse).toEqual(
+        badRequest(new InvalidResumeMinLengthError()),
+      );
     });
 
     it('should return error when request resume characteres is greater than 2500', async () => {
       const { sut } = makeSut();
 
-      const resume = faker.datatype.string(MAX_LENGTH_RESUME) + faker.datatype.string(MAX_LENGTH_RESUME);
+      const resume =
+        faker.datatype.string(MAX_LENGTH_RESUME) +
+        faker.datatype.string(MAX_LENGTH_RESUME);
       const httpRequest = {
         resume,
       };
 
       const httpResponse = await sut.handle(httpRequest);
-      expect(httpResponse).toEqual(badRequest(new InvalidResumeMaxLengthError(resume.length)));
+      expect(httpResponse).toEqual(
+        badRequest(new InvalidResumeMaxLengthError(resume.length)),
+      );
     });
 
     it('should return error when request created task returns false (cant create task)', async () => {
@@ -81,7 +90,9 @@ describe('Create Task', ()=> {
     it('should return error when throws', async () => {
       const { sut, addTask } = makeSut();
 
-      jest.spyOn(addTask, 'add').mockRejectedValueOnce(new Error('happen some error'));
+      jest
+        .spyOn(addTask, 'add')
+        .mockRejectedValueOnce(new Error('happen some error'));
 
       const resume = faker.datatype.string(MAX_LENGTH_RESUME);
       const httpRequest = {
@@ -103,7 +114,7 @@ describe('Create Task', ()=> {
       };
 
       const httpResponse = await sut.handle(httpRequest);
-      expect(httpResponse).toEqual(ok({'message': 'created'}));
+      expect(httpResponse).toEqual(ok({ message: 'created' }));
     });
   });
 });

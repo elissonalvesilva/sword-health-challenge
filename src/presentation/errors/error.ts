@@ -12,7 +12,6 @@ export class BadRequestError extends Error {
   }
 }
 
-
 export class InvalidParamError extends Error {
   constructor(paramName: string) {
     super(`Invalid param ${paramName}`);
@@ -36,7 +35,9 @@ export class CantUpdateTaskError extends Error {
 
 export class InvalidResumeMaxLengthError extends Error {
   constructor(length: number) {
-    super(`Invalid resume length length must be less than 2500, actual length: ${length}`);
+    super(
+      `Invalid resume length length must be less than 2500, actual length: ${length}`,
+    );
     this.name = 'InvalidResumeMaxLengthError';
   }
 }

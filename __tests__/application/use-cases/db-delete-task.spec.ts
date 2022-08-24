@@ -1,11 +1,11 @@
-import { DeleteTaskRepository } from "application/protocols";
-import { Task } from "domain/protocols";
-import { DbDeleteTask } from "application/use-cases";
-import { fake } from "utils";
+import { DeleteTaskRepository } from 'application/protocols';
+import { Task } from 'domain/protocols';
+import { DbDeleteTask } from 'application/use-cases';
+import { fake } from 'utils';
 
 interface SutTypes {
   sut: DbDeleteTask;
-  deleteTaskRepository: DeleteTaskRepository
+  deleteTaskRepository: DeleteTaskRepository;
 }
 
 const fakeTask = fake.fakeTask();
@@ -14,11 +14,9 @@ const makeDeleteTaskRepository = (): DeleteTaskRepository => {
     deleteTask(id: string): Promise<boolean> {
       return Promise.resolve(true);
     }
-
   }
   return new DeleteTaskRepositoryStub();
-}
-
+};
 
 const makeSut = (): SutTypes => {
   const deleteTaskRepository = makeDeleteTaskRepository();
@@ -27,7 +25,7 @@ const makeSut = (): SutTypes => {
   return {
     sut,
     deleteTaskRepository,
-  }
+  };
 };
 
 describe('DbDeleteTask UseCase', () => {
@@ -49,12 +47,12 @@ describe('DbDeleteTask UseCase', () => {
       const { sut, deleteTaskRepository } = makeSut();
 
       jest
-      .spyOn(deleteTaskRepository, 'deleteTask')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
-      );
+        .spyOn(deleteTaskRepository, 'deleteTask')
+        .mockReturnValueOnce(
+          new Promise((resolve, reject) => reject(new Error())),
+        );
 
-      const promise = sut.delete('123-fake-id')
+      const promise = sut.delete('123-fake-id');
       await expect(promise).rejects.toThrow();
     });
   });

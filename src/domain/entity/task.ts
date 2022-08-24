@@ -1,18 +1,20 @@
-import { Task } from "domain/protocols";
+import { Task } from 'domain/protocols';
 
 export const MAX_LENGTH_RESUME = 2500;
 export class TaskEntity {
-  constructor(){}
+  constructor() {}
 
   create(resume: string): [Task, boolean] {
-
-    if(resume.length > 2500) {
+    if (resume.length > 2500) {
       return [null as any, false];
     }
 
-    return [{
-      resume,
-      createdAt: new Date(),
-    }, true];
+    return [
+      {
+        resume,
+        createdAt: new Date(),
+      },
+      true,
+    ];
   }
 }

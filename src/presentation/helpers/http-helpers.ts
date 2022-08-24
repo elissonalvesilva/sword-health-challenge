@@ -1,6 +1,5 @@
-import { ServerError, UnauthorizedError } from "presentation/errors";
-import { HttpResponse } from "presentation/protocols";
-
+import { ServerError, UnauthorizedError } from 'presentation/errors';
+import { HttpResponse } from 'presentation/protocols';
 
 export const notFound = (error: Error): HttpResponse => ({
   statusCode: 404,

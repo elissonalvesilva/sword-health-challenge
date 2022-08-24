@@ -1,25 +1,25 @@
-import { Task } from "domain/protocols";
-import { GetTask } from "domain/use-cases";
-import { GetAllTasksController } from "presentation/controllers";
-import { ok, serverError } from "presentation/helpers";
-import { fake } from "utils";
+import { Task } from 'domain/protocols';
+import { GetTask } from 'domain/use-cases';
+import { GetAllTasksController } from 'presentation/controllers';
+import { ok, serverError } from 'presentation/helpers';
+import { fake } from 'utils';
 
 const fakeTask = fake.fakeTask();
 const makeGetTask = (): GetTask => {
   class GetTaskStub implements GetTask {
     getAll(): Promise<Task[]> {
-      return Promise.resolve([fakeTask])
+      return Promise.resolve([fakeTask]);
     }
     get(id: string): Promise<Task> {
-      return Promise.resolve(fakeTask)
+      return Promise.resolve(fakeTask);
     }
   }
   return new GetTaskStub();
-}
+};
 
 interface ControllerStub {
   sut: GetAllTasksController;
-  getTask: GetTask
+  getTask: GetTask;
 }
 
 const makeSut = (): ControllerStub => {
@@ -31,12 +31,14 @@ const makeSut = (): ControllerStub => {
   };
 };
 
-describe('Get All Task', ()=> {
+describe('Get All Task', () => {
   describe('Get All Task Controller', () => {
     it('should return error when getAll throws', async () => {
       const { sut, getTask } = makeSut();
 
-      jest.spyOn(getTask, 'getAll').mockRejectedValueOnce(new Error('happen some error'));
+      jest
+        .spyOn(getTask, 'getAll')
+        .mockRejectedValueOnce(new Error('happen some error'));
 
       const httpRequest = {};
 

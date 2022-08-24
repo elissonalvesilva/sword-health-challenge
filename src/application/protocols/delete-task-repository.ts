@@ -1,3 +1,3 @@
 export interface DeleteTaskRepository {
-  deleteTask(id: string): Promise<boolean>
+  deleteTask(id: string): Promise<boolean>;
 }

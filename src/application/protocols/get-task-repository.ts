@@ -1,4 +1,4 @@
-import { Task } from "domain/protocols";
+import { Task } from 'domain/protocols';
 
 export interface GetTaskRepository {
   getAllTasks(): Promise<Task[]>;

@@ -12,17 +12,13 @@ module.exports = {
     '.+\\.ts$': 'ts-jest',
   },
   setupFiles: [],
-  moduleDirectories: [
-    'node_modules',
-    path.join(__dirname, 'src'),
-  ],
+  moduleDirectories: ['node_modules', path.join(__dirname, 'src')],
   testPathIgnorePatterns: [
-    "/node_modules/",
-    "/build/",
-    "/coverage/",
-    "/test/",
-    "/*.config.js",
-    "/_old/"
+    '/node_modules/',
+    '/build/',
+    '/coverage/',
+    '/test/',
+    '/*.config.js',
+    '/_old/',
   ],
-
 };

@@ -1,7 +1,7 @@
-import { AddTaskRepository, NotifyService } from "application/protocols";
-import { Task } from "domain/protocols";
-import { DbAddTask } from "application/use-cases";
-import { fake } from "utils";
+import { AddTaskRepository, NotifyService } from 'application/protocols';
+import { Task } from 'domain/protocols';
+import { DbAddTask } from 'application/use-cases';
+import { fake } from 'utils';
 
 interface SutTypes {
   sut: DbAddTask;
@@ -16,18 +16,16 @@ const makeAddTaskRepository = (): AddTaskRepository => {
     }
   }
   return new AddTaskRepositoryStub();
-}
+};
 
 const makeNotifyService = (): NotifyService => {
   class NotifyServiceStub implements NotifyService {
     notify(task: Task): Promise<boolean> {
-      return Promise.resolve(true)
+      return Promise.resolve(true);
     }
-
   }
   return new NotifyServiceStub();
 };
-
 
 const makeSut = (): SutTypes => {
   const addTaskRepository = makeAddTaskRepository();
@@ -38,7 +36,7 @@ const makeSut = (): SutTypes => {
     sut,
     addTaskRepository,
     notifyService,
-  }
+  };
 };
 
 describe('DbAddTask UseCase', () => {
@@ -46,26 +44,21 @@ describe('DbAddTask UseCase', () => {
     it('should call AddTaskRepository with correct values', async () => {
       const { sut, addTaskRepository } = makeSut();
 
-      const addTaskRepositorySpy = jest.spyOn(
-        addTaskRepository,
-        'addTask',
-      );
+      const addTaskRepositorySpy = jest.spyOn(addTaskRepository, 'addTask');
       const fakeTask = fake.fakeTask();
       await sut.add(fakeTask);
 
-      expect(addTaskRepositorySpy).toBeCalledWith(
-        fakeTask
-      );
+      expect(addTaskRepositorySpy).toBeCalledWith(fakeTask);
     });
 
     it('should call AddTaskRepository throws', async () => {
       const { sut, addTaskRepository } = makeSut();
 
       jest
-      .spyOn(addTaskRepository, 'addTask')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
-      );
+        .spyOn(addTaskRepository, 'addTask')
+        .mockReturnValueOnce(
+          new Promise((resolve, reject) => reject(new Error())),
+        );
 
       const fakeTask = fake.fakeTask();
 
@@ -77,27 +70,23 @@ describe('DbAddTask UseCase', () => {
     it('should call NotifyService with correct values', async () => {
       const { sut, notifyService } = makeSut();
 
-      const notifyServiceSpy = jest.spyOn(
-        notifyService,
-        'notify',
-      );
+      const notifyServiceSpy = jest.spyOn(notifyService, 'notify');
       const fakeTask = fake.fakeTask();
       await sut.add(fakeTask);
 
-      expect(notifyServiceSpy).toBeCalledWith(
-        fakeTask
-      );
+      expect(notifyServiceSpy).toBeCalledWith(fakeTask);
     });
 
     it('should not return error when AddTaskRepository throws', async () => {
       const { sut, notifyService, addTaskRepository } = makeSut();
 
-      jest.spyOn(
-        addTaskRepository,
-        'addTask',
-      ).mockResolvedValueOnce(Promise.resolve(true));
+      jest
+        .spyOn(addTaskRepository, 'addTask')
+        .mockResolvedValueOnce(Promise.resolve(true));
 
-      jest.spyOn(notifyService, 'notify').mockImplementation(async () => Promise.reject(new Error('err')))
+      jest
+        .spyOn(notifyService, 'notify')
+        .mockImplementation(async () => Promise.reject(new Error('err')));
       const fakeTask = fake.fakeTask();
       const response = await sut.add(fakeTask);
       expect(response).toBe(true);
