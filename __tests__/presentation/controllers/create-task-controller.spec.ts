@@ -49,6 +49,7 @@ describe('Create Task', () => {
 
       const httpRequest = {
         resume: ' ',
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -56,7 +57,19 @@ describe('Create Task', () => {
         badRequest(new InvalidResumeMinLengthError()),
       );
     });
+    it('should return error when request didnt pass user_id', async () => {
+      const { sut } = makeSut();
 
+      const httpRequest = {
+        id: 'some-id',
+        resume: faker.lorem,
+      };
+
+      const httpResponse = await sut.handle(httpRequest);
+      expect(httpResponse).toEqual(
+        badRequest(new MissingParamError('user_id')),
+      );
+    });
     it('should return error when request resume characteres is greater than 2500', async () => {
       const { sut } = makeSut();
 
@@ -65,6 +78,7 @@ describe('Create Task', () => {
         faker.datatype.string(MAX_LENGTH_RESUME);
       const httpRequest = {
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -81,6 +95,7 @@ describe('Create Task', () => {
       const resume = faker.datatype.string(MAX_LENGTH_RESUME);
       const httpRequest = {
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -97,6 +112,7 @@ describe('Create Task', () => {
       const resume = faker.datatype.string(MAX_LENGTH_RESUME);
       const httpRequest = {
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -111,6 +127,7 @@ describe('Create Task', () => {
       const resume = faker.datatype.string(MAX_LENGTH_RESUME);
       const httpRequest = {
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);

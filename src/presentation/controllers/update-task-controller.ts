@@ -15,7 +15,7 @@ export class UpdateTaskController implements Controller {
 
   async handle(request: any): Promise<HttpResponse> {
     try {
-      const requiredFields = ['id', 'resume'];
+      const requiredFields = ['id', 'resume', 'user_id'];
 
       for (const field of requiredFields) {
         if (!request[field]) {
@@ -28,7 +28,7 @@ export class UpdateTaskController implements Controller {
       }
 
       const entity = new TaskEntity();
-      const [task, created] = entity.create(request.resume);
+      const [task, created] = entity.create(request.resume, 'user_id');
       if (!created) {
         return badRequest(
           new InvalidResumeMaxLengthError(request.resume.length),

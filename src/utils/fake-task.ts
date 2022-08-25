@@ -7,6 +7,7 @@ export const fake = {
     return {
       id: faker.datatype.uuid(),
       resume: faker.lorem.paragraph(),
+      user_id: faker.datatype.uuid(),
       createdAt: faker.date.recent(),
       updatedAt: faker.date.recent(),
     };

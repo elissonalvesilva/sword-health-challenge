@@ -56,12 +56,26 @@ describe('Update Task', () => {
       const httpResponse = await sut.handle(httpRequest);
       expect(httpResponse).toEqual(badRequest(new MissingParamError('resume')));
     });
+    it('should return error when request didnt pass user_id', async () => {
+      const { sut } = makeSut();
+
+      const httpRequest = {
+        id: 'some-id',
+        resume: faker.lorem,
+      };
+
+      const httpResponse = await sut.handle(httpRequest);
+      expect(httpResponse).toEqual(
+        badRequest(new MissingParamError('user_id')),
+      );
+    });
     it('should return error when request resume contains blank space', async () => {
       const { sut } = makeSut();
 
       const httpRequest = {
         id: 'some-id',
         resume: ' ',
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -79,6 +93,7 @@ describe('Update Task', () => {
       const httpRequest = {
         id: 'some-id',
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -98,6 +113,7 @@ describe('Update Task', () => {
       const httpRequest = {
         id: 'some-id',
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -115,6 +131,7 @@ describe('Update Task', () => {
       const httpRequest = {
         id: 'some-id',
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
@@ -132,6 +149,7 @@ describe('Update Task', () => {
       const httpRequest = {
         id: 'some-id',
         resume,
+        user_id: 'user-id',
       };
 
       const httpResponse = await sut.handle(httpRequest);
