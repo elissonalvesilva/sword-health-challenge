@@ -12,7 +12,8 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "postinstall": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "eslint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
