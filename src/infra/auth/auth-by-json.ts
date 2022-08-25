@@ -6,7 +6,10 @@ export class AuthByJson implements GetUserByTokenRepository {
 
   async get(token: string): Promise<Partial<User>> {
     const rawData = JSON.parse(this.json);
-    const user = rawData.filter((u: any) => u.token === token);
-    return user;
+    const user = rawData.users.filter((u: any) => u.token === token);
+    if (user) {
+      return user[0];
+    }
+    return null;
   }
 }
