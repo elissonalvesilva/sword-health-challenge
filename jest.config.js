@@ -13,7 +13,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '@/__tests__/(.*)': '<rootDir>/__tests__/$1',
-    '@/(.*)': '<rootDir>/src/$1'
+    '@/(.*)': '<rootDir>/src/$1',
   },
   setupFiles: [],
   moduleDirectories: ['node_modules', path.join(__dirname, 'src')],
