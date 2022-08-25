@@ -28,7 +28,7 @@ export class CreateTaskController implements Controller {
       }
 
       const entity = new TaskEntity();
-      const [task, created] = entity.create(request.resume, 'user-id');
+      const [task, created] = entity.create(request.resume, request.user_id);
       if (!created) {
         return badRequest(
           new InvalidResumeMaxLengthError(request.resume.length),
