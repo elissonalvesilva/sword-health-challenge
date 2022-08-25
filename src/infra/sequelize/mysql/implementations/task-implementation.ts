@@ -22,6 +22,7 @@ export class TaskImplementation
       });
       return true;
     } catch (error) {
+      console.error(error);
       return false;
     }
   }
@@ -39,6 +40,7 @@ export class TaskImplementation
       }
       return true;
     } catch (error) {
+      console.error(error);
       return false;
     }
   }
@@ -47,24 +49,32 @@ export class TaskImplementation
     return tasks;
   }
   async getTaskById(id: string): Promise<Task> {
-    const task = await TaskModel.findByPk(id);
     let response: Task = {
       resume: '',
       user_id: '',
     };
-
-    if (task) {
-      response = task;
+    try {
+      const task = await TaskModel.findByPk(id);
+      if (task) {
+        response = task;
+      }
+      return response;
+    } catch (error) {
+      console.error(error);
+      return response;
     }
-
-    return response;
   }
 
   async deleteTask(id: string): Promise<boolean> {
-    const deletedTask = await TaskModel.destroy({ where: { id: id } });
-    if (deletedTask) {
-      return Promise.resolve(true);
+    try {
+      const deletedTask = await TaskModel.destroy({ where: { id: id } });
+      if (deletedTask) {
+        return Promise.resolve(true);
+      }
+      return Promise.resolve(false);
+    } catch (error) {
+      console.error(error);
+      return Promise.resolve(false);
     }
-    return Promise.resolve(false);
   }
 }
