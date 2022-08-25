@@ -1,42 +1,42 @@
 {
   "users": [
     {
-      "token": "6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7",
+      "token": "6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e",
       "actions": ["create", "list", "update"],
       "role": "user"
     },
     {
-      "token": "0a33142f02d3c63e5cc6743a1c852936d0b7dbbcd8e7d8b1994da63d",
+      "token": "0a33142f02d3c63e5cc6743a1c852936d0b7dbbcd8e7d8",
       "actions": ["create", "list", "update"],
       "role": "user"
     },
     {
-      "token": "25ab1ac565856d499f958012c0842e432050c3988037c7919021f011",
+      "token": "25ab1ac565856d499f958012c0842e432050c3988037c7",
       "actions": ["create", "list", "update"],
       "role": "user"
     },
     {
-      "token": "3360e4f1a619f1628be65abec0da2992d4c7ceab1d2d3671ef4790b7",
+      "token": "3360e4f1a619f1628be65abec0da2992d4c7ceab1d2d36",
       "actions": ["create", "list", "update"],
       "role": "user"
     },
     {
-      "token": "63e6ceb28ad474fa51c3d5dda2239adb5e58a1ae2600d18c6e116746",
+      "token": "63e6ceb28ad474fa51c3d5dda2239adb5e58a1ae2600d1",
       "actions": ["create", "list", "update"],
       "role": "user"
     },
     {
-      "token": "3360e4f1a619f1628be65abec0da2992d4c7ceab1d2d3671ef4790b7",
+      "token": "3360e4f1a619f1628be65abec0da2992d4c7ceab1d2d36",
       "actions": ["create", "list", "update"],
       "role": "user"
     },
     {
-      "token": "683f329504d79e4f25c7826c4970cceb806fe5d718750c1e3130e1a4",
+      "token": "683f329504d79e4f25c7826c4970cceb806fe5d718750c",
       "actions": ["list", "list-all", "delete"],
       "role": "admin"
     },
     {
-      "token": "0c20a2dd786e6aa4cf94268ec7dd95c5dc125697c0a340928e43cbfc",
+      "token": "0c20a2dd786e6aa4cf94268ec7dd95c5dc125697c0a3409",
       "actions": ["list", "list-all", "delete"],
       "role": "admin"
     }
