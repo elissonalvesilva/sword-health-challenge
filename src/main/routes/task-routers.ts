@@ -6,11 +6,12 @@ import { makeDeleteTaskController } from '@/main/factories/controllers/delete-ta
 import { makeGetAllTasksController } from '@/main/factories/controllers/get-all-tasks-controller-factory';
 import { makeGetTaskController } from '@/main/factories/controllers/get-task-controller-factory';
 import { makeUpdateTaskController } from '@/main/factories/controllers/update-task-controller-factory';
+import { adminAuth, auth } from '@/main/middlewares';
 
 export default (router: Router): void => {
-  router.post('/task', adaptRoute(makeCreateTaskController()));
-  router.get('/tasks', adaptRoute(makeGetAllTasksController()));
-  router.get('/task/:id', adaptRoute(makeGetTaskController()));
-  router.put('/task/:id', adaptRoute(makeUpdateTaskController()));
-  router.delete('/task/:id', adaptRoute(makeDeleteTaskController()));
+  router.post('/task', auth, adaptRoute(makeCreateTaskController()));
+  router.get('/tasks', adminAuth, adaptRoute(makeGetAllTasksController()));
+  router.get('/task/:id', auth, adaptRoute(makeGetTaskController()));
+  router.put('/task/:id', auth, adaptRoute(makeUpdateTaskController()));
+  router.delete('/task/:id', adminAuth, adaptRoute(makeDeleteTaskController()));
 };
