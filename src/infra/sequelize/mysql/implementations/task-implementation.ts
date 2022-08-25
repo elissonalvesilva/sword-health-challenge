@@ -5,7 +5,7 @@ import {
   DeleteTaskRepository,
 } from '@/application/protocols';
 import { Task } from '@/domain/protocols';
-import { TaskModel } from 'infra/sequelize/mysql/models/task-model';
+import { TaskModel } from '@/infra/sequelize/mysql/models/task-model';
 
 export class TaskImplementation
   implements
@@ -18,7 +18,7 @@ export class TaskImplementation
     try {
       await TaskModel.create({
         resume: task.resume,
-        user_id: 'asda',
+        user_id: task.user_id,
       });
       return true;
     } catch (error) {
@@ -50,6 +50,7 @@ export class TaskImplementation
     const task = await TaskModel.findByPk(id);
     let response: Task = {
       resume: '',
+      user_id: '',
     };
 
     if (task) {
