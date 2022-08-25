@@ -2,12 +2,17 @@ import {
   AddTaskRepository,
   GetTaskRepository,
   UpdateTaskRepository,
+  DeleteTaskRepository,
 } from '@/application/protocols';
 import { Task } from '@/domain/protocols';
-import { TaskModel } from '@/infra/sequelize/mysql/models/task-model';
+import { TaskModel } from 'infra/sequelize/mysql/models/task-model';
 
 export class TaskImplementation
-  implements AddTaskRepository, UpdateTaskRepository, GetTaskRepository
+  implements
+    AddTaskRepository,
+    UpdateTaskRepository,
+    GetTaskRepository,
+    DeleteTaskRepository
 {
   async addTask(task: Task): Promise<boolean> {
     try {
@@ -52,5 +57,13 @@ export class TaskImplementation
     }
 
     return response;
+  }
+
+  async deleteTask(id: string): Promise<boolean> {
+    const deletedTask = await TaskModel.destroy({ where: { id: id } });
+    if (deletedTask) {
+      return Promise.resolve(true);
+    }
+    return Promise.resolve(false);
   }
 }
