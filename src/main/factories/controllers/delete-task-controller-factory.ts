@@ -1,5 +1,5 @@
-import { DeleteTaskController } from '@/presentation/controllers';
-import { Controller } from '@/presentation/protocols';
+import { DeleteTaskController } from '@/tasks/presentation/controllers';
+import { Controller } from '@/tasks/presentation/protocols';
 import { makeDbDelete } from '@/main/factories/use-cases';
 
 export const makeDeleteTaskController = (): Controller => {

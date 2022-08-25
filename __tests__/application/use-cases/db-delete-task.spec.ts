@@ -1,6 +1,6 @@
-import { DeleteTaskRepository } from '@/application/protocols';
-import { Task } from '@/domain/protocols';
-import { DbDeleteTask } from '@/application/use-cases';
+import { DeleteTaskRepository } from '@/tasks/application/protocols';
+import { Task } from '@/tasks/domain/protocols';
+import { DbDeleteTask } from '@/tasks/application/use-cases';
 import { fake } from '@/utils';
 
 interface SutTypes {

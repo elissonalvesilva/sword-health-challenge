@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-import { DbGetUserByToken } from '@/application/use-cases';
-import { GetUserByToken } from '@/domain/use-cases';
-import { AuthByJson } from '@/infra/auth';
+import { DbGetUserByToken } from '@/tasks/application/use-cases';
+import { GetUserByToken } from '@/tasks/domain/use-cases';
+import { AuthByJson } from '@/tasks/infra/auth';
 
 export const makeGetUserByToken = (): GetUserByToken => {
   const json: string = fs.readFileSync(process.cwd() + '/users.json', 'utf8');

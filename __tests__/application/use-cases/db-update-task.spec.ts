@@ -1,6 +1,6 @@
-import { UpdateTaskRepository } from '@/application/protocols';
-import { Task } from '@/domain/protocols';
-import { DbUpdateTask } from '@/application/use-cases';
+import { UpdateTaskRepository } from '@/tasks/application/protocols';
+import { Task } from '@/tasks/domain/protocols';
+import { DbUpdateTask } from '@/tasks/application/use-cases';
 import { fake } from '@/utils';
 
 interface SutTypes {

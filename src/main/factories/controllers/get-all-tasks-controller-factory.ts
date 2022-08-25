@@ -1,5 +1,5 @@
-import { GetAllTasksController } from '@/presentation/controllers';
-import { Controller } from '@/presentation/protocols';
+import { GetAllTasksController } from '@/tasks/presentation/controllers';
+import { Controller } from '@/tasks/presentation/protocols';
 import { makeDbGet } from '@/main/factories/use-cases';
 
 export const makeGetAllTasksController = (): Controller => {

@@ -1,15 +1,15 @@
 import { faker } from '@faker-js/faker';
-import { MAX_LENGTH_RESUME } from '@/domain/entity';
-import { Task } from '@/domain/protocols';
-import { UpdateTask } from '@/domain/use-cases';
-import { UpdateTaskController } from '@/presentation/controllers';
+import { MAX_LENGTH_RESUME } from '@/tasks/domain/entity';
+import { Task } from '@/tasks/domain/protocols';
+import { UpdateTask } from '@/tasks/domain/use-cases';
+import { UpdateTaskController } from '@/tasks/presentation/controllers';
 import {
   CantUpdateTaskError,
   InvalidResumeMaxLengthError,
   InvalidResumeMinLengthError,
   MissingParamError,
-} from '@/presentation/errors';
-import { badRequest, ok, serverError } from '@/presentation/helpers';
+} from '@/tasks/presentation/errors';
+import { badRequest, ok, serverError } from '@/tasks/presentation/helpers';
 
 const makeUpdateTask = (): UpdateTask => {
   class UpdateTaskStub implements UpdateTask {

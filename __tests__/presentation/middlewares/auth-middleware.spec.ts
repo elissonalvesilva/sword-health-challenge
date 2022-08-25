@@ -1,8 +1,8 @@
-import { User } from '@/domain/protocols';
-import { GetUserByToken } from '@/domain/use-cases';
-import { AccessDeniedError } from '@/presentation/errors';
-import { forbidden, ok } from '@/presentation/helpers';
-import { AuthMiddleware } from '@/presentation/middlewares';
+import { User } from '@/tasks/domain/protocols';
+import { GetUserByToken } from '@/tasks/domain/use-cases';
+import { AccessDeniedError } from '@/tasks/presentation/errors';
+import { forbidden, ok } from '@/tasks/presentation/helpers';
+import { AuthMiddleware } from '@/tasks/presentation/middlewares';
 import { fakeUser } from '@/utils';
 
 const makeGetUserByToken = (): GetUserByToken => {

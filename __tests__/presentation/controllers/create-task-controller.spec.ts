@@ -1,15 +1,15 @@
 import { faker } from '@faker-js/faker';
-import { MAX_LENGTH_RESUME } from '@/domain/entity';
-import { Task } from '@/domain/protocols';
-import { AddTask } from '@/domain/use-cases';
-import { CreateTaskController } from '@/presentation/controllers';
+import { MAX_LENGTH_RESUME } from '@/tasks/domain/entity';
+import { Task } from '@/tasks/domain/protocols';
+import { AddTask } from '@/tasks/domain/use-cases';
+import { CreateTaskController } from '@/tasks/presentation/controllers';
 import {
   CantCreateTaskError,
   InvalidResumeMaxLengthError,
   InvalidResumeMinLengthError,
   MissingParamError,
-} from '@/presentation/errors';
-import { badRequest, ok, serverError } from '@/presentation/helpers';
+} from '@/tasks/presentation/errors';
+import { badRequest, ok, serverError } from '@/tasks/presentation/helpers';
 
 const makeAddTask = (): AddTask => {
   class AddTaskStub implements AddTask {

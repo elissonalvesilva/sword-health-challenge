@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { User } from '@/domain/protocols';
+import { User } from '@/tasks/domain/protocols';
 
 export const fakeUser = {
   makeFake(): User {

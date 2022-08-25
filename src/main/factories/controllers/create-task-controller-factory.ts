@@ -1,5 +1,5 @@
-import { CreateTaskController } from '@/presentation/controllers';
-import { Controller } from '@/presentation/protocols';
+import { CreateTaskController } from '@/tasks/presentation/controllers';
+import { Controller } from '@/tasks/presentation/protocols';
 import { makeDbAdd } from '@/main/factories/use-cases';
 
 export const makeCreateTaskController = (): Controller => {

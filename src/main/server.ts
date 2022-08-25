@@ -2,7 +2,7 @@ import 'module-alias/register';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import autenticate from '@/infra/sequelize/mysql/config/database';
+import autenticate from '@/tasks/infra/sequelize/mysql/config/database';
 
 autenticate()
   .then(async () => {

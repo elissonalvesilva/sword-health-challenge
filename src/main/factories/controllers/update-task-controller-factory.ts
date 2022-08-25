@@ -1,5 +1,5 @@
-import { UpdateTaskController } from '@/presentation/controllers';
-import { Controller } from '@/presentation/protocols';
+import { UpdateTaskController } from '@/tasks/presentation/controllers';
+import { Controller } from '@/tasks/presentation/protocols';
 import { makeDbUpdate } from '@/main/factories/use-cases';
 
 export const makeUpdateTaskController = (): Controller => {

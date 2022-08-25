@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { MAX_LENGTH_RESUME, TaskEntity } from '@/domain/entity';
+import { MAX_LENGTH_RESUME, TaskEntity } from '@/tasks/domain/entity';
 
 describe('Task Entity', () => {
   it('should return false when resume length is greater than 2500', () => {

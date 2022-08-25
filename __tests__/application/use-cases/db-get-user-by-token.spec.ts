@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-import { GetUserByTokenRepository } from '@/application/protocols';
-import { User } from '@/domain/protocols';
-import { DbGetUserByToken } from '@/application/use-cases';
+import { GetUserByTokenRepository } from '@/tasks/application/protocols';
+import { User } from '@/tasks/domain/protocols';
+import { DbGetUserByToken } from '@/tasks/application/use-cases';
 
 const makeUserByTokenRepository = (): GetUserByTokenRepository => {
   class GetUserByTokenRepositoryStub implements GetUserByTokenRepository {

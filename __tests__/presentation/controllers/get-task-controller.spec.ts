@@ -1,9 +1,12 @@
 import { faker } from '@faker-js/faker';
-import { Task } from '@/domain/protocols';
-import { GetTask } from '@/domain/use-cases';
-import { GetTaskController } from '@/presentation/controllers';
-import { MissingParamError, NotFoundParamError } from '@/presentation/errors';
-import { badRequest, ok, serverError } from '@/presentation/helpers';
+import { Task } from '@/tasks/domain/protocols';
+import { GetTask } from '@/tasks/domain/use-cases';
+import { GetTaskController } from '@/tasks/presentation/controllers';
+import {
+  MissingParamError,
+  NotFoundParamError,
+} from '@/tasks/presentation/errors';
+import { badRequest, ok, serverError } from '@/tasks/presentation/helpers';
 import { fake } from '@/utils';
 
 const fakeTask = fake.fakeTask();
