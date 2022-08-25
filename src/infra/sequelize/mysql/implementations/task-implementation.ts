@@ -2,9 +2,9 @@ import {
   AddTaskRepository,
   GetTaskRepository,
   UpdateTaskRepository,
-} from 'application/protocols';
-import { Task } from 'domain/protocols';
-import { TaskModel } from 'infra/sequelize/mysql/models/task-model';
+} from '@/application/protocols';
+import { Task } from '@/domain/protocols';
+import { TaskModel } from '@/infra/sequelize/mysql/models/task-model';
 
 export class TaskImplementation
   implements AddTaskRepository, UpdateTaskRepository, GetTaskRepository

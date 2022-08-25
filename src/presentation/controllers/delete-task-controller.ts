@@ -1,8 +1,8 @@
-import { DeleteTask } from 'domain/use-cases/delete-task';
-import { MissingParamError, NotFoundParamError } from 'presentation/errors';
-import { badRequest, ok, serverError } from 'presentation/helpers';
-import { HttpResponse } from 'presentation/protocols';
-import { Controller } from 'presentation/protocols';
+import { DeleteTask } from '@/domain/use-cases';
+import { MissingParamError, NotFoundParamError } from '@/presentation/errors';
+import { badRequest, ok, serverError } from '@/presentation/helpers';
+import { HttpResponse } from '@/presentation/protocols';
+import { Controller } from '@/presentation/protocols';
 
 export class DeleteTaskController implements Controller {
   constructor(private readonly deleteTask: DeleteTask) {}

@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
-import { Task } from 'domain/protocols';
-import { GetTask } from 'domain/use-cases';
-import { GetTaskController } from 'presentation/controllers';
-import { MissingParamError, NotFoundParamError } from 'presentation/errors';
-import { badRequest, ok, serverError } from 'presentation/helpers';
-import { fake } from 'utils';
+import { Task } from '@/domain/protocols';
+import { GetTask } from '@/domain/use-cases';
+import { GetTaskController } from '@/presentation/controllers';
+import { MissingParamError, NotFoundParamError } from '@/presentation/errors';
+import { badRequest, ok, serverError } from '@/presentation/helpers';
+import { fake } from '@/utils';
 
 const fakeTask = fake.fakeTask();
 const makeGetTask = (): GetTask => {

@@ -1,4 +1,4 @@
-import { Task } from 'domain/protocols';
+import { Task } from '@/domain/protocols';
 
 export const MAX_LENGTH_RESUME = 2500;
 export class TaskEntity {

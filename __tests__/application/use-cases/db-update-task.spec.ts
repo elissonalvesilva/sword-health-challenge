@@ -1,7 +1,7 @@
-import { UpdateTaskRepository } from 'application/protocols';
-import { Task } from 'domain/protocols';
-import { DbUpdateTask } from 'application/use-cases';
-import { fake } from 'utils';
+import { UpdateTaskRepository } from '@/application/protocols';
+import { Task } from '@/domain/protocols';
+import { DbUpdateTask } from '@/application/use-cases';
+import { fake } from '@/utils';
 
 interface SutTypes {
   sut: DbUpdateTask;

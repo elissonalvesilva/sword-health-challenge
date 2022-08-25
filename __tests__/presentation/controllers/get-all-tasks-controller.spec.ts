@@ -1,8 +1,8 @@
-import { Task } from 'domain/protocols';
-import { GetTask } from 'domain/use-cases';
-import { GetAllTasksController } from 'presentation/controllers';
-import { ok, serverError } from 'presentation/helpers';
-import { fake } from 'utils';
+import { Task } from '@/domain/protocols';
+import { GetTask } from '@/domain/use-cases';
+import { GetAllTasksController } from '@/presentation/controllers';
+import { ok, serverError } from '@/presentation/helpers';
+import { fake } from '@/utils';
 
 const fakeTask = fake.fakeTask();
 const makeGetTask = (): GetTask => {

@@ -1,8 +1,8 @@
-import { DeleteTask } from 'domain/use-cases';
-import { DeleteTaskController } from 'presentation/controllers';
-import { NotFoundParamError } from 'presentation/errors';
-import { badRequest, ok, serverError } from 'presentation/helpers';
-import { fake } from 'utils';
+import { DeleteTask } from '@/domain/use-cases';
+import { DeleteTaskController } from '@/presentation/controllers';
+import { NotFoundParamError } from '@/presentation/errors';
+import { badRequest, ok, serverError } from '@/presentation/helpers';
+import { fake } from '@/utils';
 
 const fakeTask = fake.fakeTask();
 const makeDeleteTask = (): DeleteTask => {

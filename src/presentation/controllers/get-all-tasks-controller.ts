@@ -1,7 +1,7 @@
-import { GetTask } from 'domain/use-cases';
-import { ok, serverError } from 'presentation/helpers';
-import { HttpResponse } from 'presentation/protocols';
-import { Controller } from 'presentation/protocols';
+import { GetTask } from '@/domain/use-cases';
+import { ok, serverError } from '@/presentation/helpers';
+import { HttpResponse } from '@/presentation/protocols';
+import { Controller } from '@/presentation/protocols';
 
 export class GetAllTasksController implements Controller {
   constructor(private readonly getTask: GetTask) {}

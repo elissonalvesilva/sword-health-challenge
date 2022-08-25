@@ -1,4 +1,4 @@
-import { Task } from 'domain/protocols/task';
+import { Task } from '@/domain/protocols/task';
 
 export interface GetTask {
   getAll(): Promise<Partial<Task[]>>;

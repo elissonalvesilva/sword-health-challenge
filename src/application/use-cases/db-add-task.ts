@@ -1,7 +1,7 @@
-import { NotifyService } from 'application/protocols';
-import { AddTaskRepository } from 'application/protocols/add-task-repository';
-import { Task } from 'domain/protocols';
-import { AddTask } from 'domain/use-cases';
+import { NotifyService } from '@/application/protocols';
+import { AddTaskRepository } from '@/application/protocols/add-task-repository';
+import { Task } from '@/domain/protocols';
+import { AddTask } from '@/domain/use-cases';
 
 export class DbAddTask implements AddTask {
   constructor(

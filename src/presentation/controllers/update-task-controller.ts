@@ -1,14 +1,14 @@
-import { TaskEntity } from 'domain/entity';
-import { UpdateTask } from 'domain/use-cases';
+import { TaskEntity } from '@/domain/entity';
+import { UpdateTask } from '@/domain/use-cases';
 import {
   CantUpdateTaskError,
   InvalidResumeMaxLengthError,
   InvalidResumeMinLengthError,
   MissingParamError,
-} from 'presentation/errors';
-import { badRequest, ok, serverError } from 'presentation/helpers';
-import { HttpResponse } from 'presentation/protocols';
-import { Controller } from 'presentation/protocols';
+} from '@/presentation/errors';
+import { badRequest, ok, serverError } from '@/presentation/helpers';
+import { HttpResponse } from '@/presentation/protocols';
+import { Controller } from '@/presentation/protocols';
 
 export class UpdateTaskController implements Controller {
   constructor(private readonly updateTask: UpdateTask) {}

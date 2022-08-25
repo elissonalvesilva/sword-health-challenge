@@ -1,7 +1,7 @@
-import { AddTaskRepository, NotifyService } from 'application/protocols';
-import { Task } from 'domain/protocols';
-import { DbAddTask } from 'application/use-cases';
-import { fake } from 'utils';
+import { AddTaskRepository, NotifyService } from '@/application/protocols';
+import { Task } from '@/domain/protocols';
+import { DbAddTask } from '@/application/use-cases';
+import { fake } from '@/utils';
 
 interface SutTypes {
   sut: DbAddTask;

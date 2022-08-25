@@ -1,6 +1,6 @@
-import { GetTaskRepository } from 'application/protocols';
-import { Task } from 'domain/protocols';
-import { GetTask } from 'domain/use-cases';
+import { GetTaskRepository } from '@/application/protocols';
+import { Task } from '@/domain/protocols';
+import { GetTask } from '@/domain/use-cases';
 
 export class DbGetTask implements GetTask {
   constructor(private readonly getTaskRepository: GetTaskRepository) {}

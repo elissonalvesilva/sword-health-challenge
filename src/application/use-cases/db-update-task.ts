@@ -1,6 +1,6 @@
-import { UpdateTaskRepository } from 'application/protocols';
-import { Task } from 'domain/protocols';
-import { UpdateTask } from 'domain/use-cases';
+import { UpdateTaskRepository } from '@/application/protocols';
+import { Task } from '@/domain/protocols';
+import { UpdateTask } from '@/domain/use-cases';
 
 export class DbUpdateTask implements UpdateTask {
   constructor(private readonly updateTaskRepository: UpdateTaskRepository) {}

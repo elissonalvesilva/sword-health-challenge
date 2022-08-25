@@ -1,7 +1,7 @@
-import { GetTaskRepository } from 'application/protocols';
-import { Task } from 'domain/protocols';
-import { DbGetTask } from 'application/use-cases';
-import { fake } from 'utils';
+import { GetTaskRepository } from '@/application/protocols';
+import { Task } from '@/domain/protocols';
+import { DbGetTask } from '@/application/use-cases';
+import { fake } from '@/utils';
 
 interface SutTypes {
   sut: DbGetTask;

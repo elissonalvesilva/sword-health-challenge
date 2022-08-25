@@ -6,7 +6,7 @@ import {
   InferCreationAttributes,
   CreationOptional,
 } from 'sequelize';
-import { database } from 'infra/sequelize/mysql/config/database';
+import { database } from '@/infra/sequelize/mysql/config/database';
 
 export class TaskModel extends Model<
   InferAttributes<TaskModel>,

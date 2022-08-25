@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { Task } from 'domain/protocols';
+import { Task } from '@/domain/protocols';
 
 export const fake = {
   fakeTask(): Task {

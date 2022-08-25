@@ -1,5 +1,5 @@
-import { DeleteTaskRepository } from 'application/protocols/delete-task-repository';
-import { DeleteTask } from 'domain/use-cases/delete-task';
+import { DeleteTaskRepository } from '@/application/protocols';
+import { DeleteTask } from '@/domain/use-cases';
 
 export class DbDeleteTask implements DeleteTask {
   constructor(private readonly deleteTaskRepository: DeleteTaskRepository) {}
