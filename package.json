@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:api": "npm run build:api && node dist/tasks/main/server.js",
-    "start:consumer": "npm run build:consumer && node dist/notify-service/cmd/server.js",
+    "start:api": "node dist/tasks/main/server.js",
+    "start:consumer": "node dist/notify-service/cmd/server.js",
     "build:api": "rimraf ./dist && tsc -p tsconfig-build.json",
     "build:consumer": "rimraf ./dist && tsc -p tsconfig-build.json",
     "start:dev": "nodemon",
