@@ -1,11 +1,14 @@
 import Kafka, { KafkaConsumer, Message } from 'node-rdkafka';
+import { Task } from './../domain/protocol/task';
 
-import { createConsumer } from '@/notify-service/infra/kafka';
+import { createConsumer } from '../infra/kafka';
 
-import { config } from '@/notify-service/infra/kafka';
+import { config } from '../infra/kafka';
 
 export async function consumerNotify(): Promise<void> {
-  console.log(`Let's read some records from topic ${config.topic}, okay?`);
+  console.log(
+    `================ READING TOPIC: ${config.topic}====================`,
+  );
 
   const consumer: KafkaConsumer = await createConsumer(
     Kafka.KafkaConsumer,
@@ -24,9 +27,22 @@ export async function consumerNotify(): Promise<void> {
 
 // callback to handle message delivery
 function onData(data: Message): void {
-  const messageDate: Date = new Date(<number>data.timestamp);
-  const readableMessageDate = `${messageDate.toDateString()} ${messageDate.toTimeString()}`;
   console.log(
-    `Consumed record with key ${data.key} and value ${data.value} of partition ${data.partition} @ offset ${data.offset}, sent at ${readableMessageDate}`,
+    '============================= NOTIFY SERVICE ==================================',
   );
+  if (data.value) {
+    const message = JSON.parse(data.value.toString()!);
+    if (message) {
+      const task: Task = {
+        user_id: message.user_id,
+        resume: message.resume,
+        createdAt: message.createdAt,
+      };
+      console.log(
+        `The tech ${task.user_id} performed the task ${task.resume} on date ${task.createdAt}`,
+      );
+    }
+  } else {
+    console.error('Receive blank message');
+  }
 }

@@ -5,6 +5,6 @@ import { consumerNotify } from './function';
 
 consumerNotify()
   .then(() => {
-    console.log('STARTING CONSUMER');
+    console.log('CONSUMER READY');
   })
   .catch(console.error);
