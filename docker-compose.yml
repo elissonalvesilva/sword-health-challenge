@@ -1,11 +1,49 @@
 version: '3.1'
 
 services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile.tasks
+    ports:
+      - '4513:4513'
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - PORT=${PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASS=${DATABASE_PASS}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - BOOTSTRAP_SERVERS=${BOOTSTRAP_SERVERS}
+      - TOPIC=${TOPIC}
+      - GROUP_ID=${GROUP_ID}
+      - AUTO_OFFSET_RESET=${AUTO_OFFSET_RESET}
+    command: npm run start:api
+
+  consumer:
+    container_name: consumer
+    build:
+      context: .
+      dockerfile: Dockerfile.notify-service
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      - BOOTSTRAP_SERVERS=${BOOTSTRAP_SERVERS}
+      - TOPIC=${TOPIC}
+      - GROUP_ID=${GROUP_ID}
+      - AUTO_OFFSET_RESET=${AUTO_OFFSET_RESET}
+    command: npm run start:consumer
+
 
   db:
     image: 'mysql:latest'
     restart: always
-    container_name: 'mysql'
+    container_name: 'database_tasks'
     command: --init-file /data/application/init.sql
     volumes:
       - ./db_data:/var/lib/mysql:rw
@@ -17,6 +55,10 @@ services:
       MYSQL_PASSWORD: secret
     ports:
       - '3306:3306'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 20
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.2.1
@@ -31,7 +73,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.2.1
     hostname: kafka
-    container_name: kafka
+    container_name: kafka_notify
     depends_on:
       - zookeeper
     ports:
@@ -43,14 +85,20 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka_notify:29092,PLAINTEXT_HOST://kafka_notify:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_JMX_PORT: 9101
-      KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_JMX_HOSTNAME: kafka_notify
       KAFKA_NUM_PARTITIONS: 1
+    healthcheck:
+      test: nc -z localhost 9092 || exit -1
+      start_period: 15s
+      interval: 5s
+      timeout: 10s
+      retries: 10
 
   init-kafka:
     image: confluentinc/cp-kafka:7.2.1

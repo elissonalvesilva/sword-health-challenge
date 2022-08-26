@@ -1,0 +1,27 @@
+FROM node:16-alpine as base
+RUN apk add --no-cache python3 g++ bash make openssl
+
+ENV CPPFLAGS=-I/usr/local/opt/openssl/include
+ENV LDFLAGS=-L/usr/local/opt/openssl/lib
+
+WORKDIR /home/node/app
+
+
+RUN apk --no-cache --virtual build-dependencies add \
+        python3 \
+        make \
+        g++
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+FROM base as production
+
+ENV NODE_PATH=./dist
+
+EXPOSE 4513
+
+RUN npm run build:api
