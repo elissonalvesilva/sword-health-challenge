@@ -14,10 +14,11 @@ export class DbAddTask implements AddTask {
 
     if (addedTask) {
       try {
-        await this.notifyService.notify(task);
+        this.notifyService.notify(task);
       } catch (error) {
         // send to sentry
         console.log(error);
+        return addedTask;
       }
     }
 
