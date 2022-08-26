@@ -23,8 +23,8 @@ const makeAddTaskRepository = (): AddTaskRepository => {
 
 const makeNotifyService = (): NotifyService => {
   class NotifyServiceStub implements NotifyService {
-    notify(task: Task): Promise<boolean> {
-      return Promise.resolve(true);
+    notify(task: Task): Promise<void> {
+      return Promise.resolve();
     }
   }
   return new NotifyServiceStub();
@@ -78,21 +78,6 @@ describe('DbAddTask UseCase', () => {
       await sut.add(fakeTask);
 
       expect(notifyServiceSpy).toBeCalledWith(fakeTask);
-    });
-
-    it('should not return error when AddTaskRepository throws', async () => {
-      const { sut, notifyService, addTaskRepository } = makeSut();
-
-      jest
-        .spyOn(addTaskRepository, 'addTask')
-        .mockResolvedValueOnce(Promise.resolve(true));
-
-      jest
-        .spyOn(notifyService, 'notify')
-        .mockImplementation(async () => Promise.reject(new Error('err')));
-      const fakeTask = fake.fakeTask();
-      const response = await sut.add(fakeTask);
-      expect(response).toBe(true);
     });
   });
 });
